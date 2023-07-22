@@ -1,0 +1,513 @@
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  Insert
+</button>
+
+<!-- Button trigger modal2 -->
+<button
+  type="button"
+  class="btn btn-success"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal2"
+>
+  Update
+</button>
+
+<!-- Button trigger modal3 -->
+<button
+  type="button"
+  class="btn btn-danger"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal3"
+>
+  Deleate
+</button>
+
+<button mat-raised-button color="primary" (click)="loadProducts()">
+  Load Products
+</button>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="product_name">
+    <th mat-header-cell *matHeaderCellDef>Product Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.product_name }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="product">
+    <th mat-header-cell *matHeaderCellDef>Product</th>
+    <td mat-cell *matCellDef="let element">{{ element.product }}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="cost">
+    <th mat-header-cell *matHeaderCellDef>Cost</th>
+    <td mat-cell *matCellDef="let element">{{ element.cost }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef>createdAt</th>
+    <td mat-cell *matCellDef="let element">{{ element.createdAt }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="product_material">
+    <th mat-header-cell *matHeaderCellDef>product_material</th>
+    <td mat-cell *matCellDef="let element">{{ element.product_material }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>description</th>
+    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="product_type">
+    <th mat-header-cell *matHeaderCellDef>product_type</th>
+    <td mat-cell *matCellDef="let element">{{ element.product_type }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="product_image">
+    <th mat-header-cell *matHeaderCellDef>Product Image</th>
+    <td mat-cell *matCellDef="let element">
+      <img [src]="element.product_image" class="img" />
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form #r="ngForm" (ngSubmit)="Insert(r)">
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example8"
+              placeholder="CREATED AT"
+              name="createdAt"
+              ngModel
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example8"
+              placeholder="PRODUCT NAME"
+              name="product_name"
+              ngModel
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example8"
+              placeholder="PRODUCT IMAGE "
+              name="product_image"
+              ngModel
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                <input
+                  type="text"
+                  id="form3Example1m1"
+                  placeholder="PRODUCT TYPE"
+                  name="product_type"
+                  ngModel
+                  class="form-control form-control-sm"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                <input
+                  type="text"
+                  id="form3Example1n1"
+                  placeholder="COST"
+                  name="cost"
+                  ngModel
+                  class="form-control form-control-sm"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example9"
+              placeholder="DESCRIPTION"
+              name="description"
+              ngModel
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example90"
+              placeholder="PRODUCT MATERIAL"
+              name="product_material"
+              ngModel
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example99"
+              placeholder="PRODUCT"
+              name="product"
+              ngModel
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example97"
+              placeholder="ID"
+              name="id"
+              ngModel
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="d-flex justify-content-end pt-3">
+            <button type="button" class="btn btn-light btn-sm">
+              Reset all
+            </button>
+            <button type="submit" class="btn btn-success btn-sm ms-2">
+              Insert
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal2 -->
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="loadProductById(product.id)">
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example97"
+              placeholder="ID"
+              name="id"
+              [(ngModel)]="product.id"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-success btn-sm ms-2">GET</button>
+        </form>
+
+        <form (ngSubmit)="updateProduct()">
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example8"
+              placeholder="CREATED AT"
+              name="createdAt"
+              [(ngModel)]="product.createdAt"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example8"
+              placeholder="PRODUCT NAME"
+              name="product_name"
+              [(ngModel)]="product.product_name"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example8"
+              placeholder="PRODUCT IMAGE "
+              name="product_image"
+              [(ngModel)]="product.product_image"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                <input
+                  type="text"
+                  id="form3Example1m1"
+                  placeholder="PRODUCT TYPE"
+                  name="product_type"
+                  [(ngModel)]="product.product_type"
+                  class="form-control form-control-sm"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                <input
+                  type="text"
+                  id="form3Example1n1"
+                  placeholder="COST"
+                  name="cost"
+                  [(ngModel)]="product.cost"
+                  class="form-control form-control-sm"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example9"
+              placeholder="DESCRIPTION"
+              name="description"
+              [(ngModel)]="product.description"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example90"
+              placeholder="PRODUCT MATERIAL"
+              name="product_material"
+              [(ngModel)]="product.product_material"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example99"
+              placeholder="PRODUCT"
+              name="product"
+              [(ngModel)]="product.product"
+              class="form-control form-control-sm"
+            />
+          </div>
+          <div class="d-flex justify-content-end pt-3">
+            <button type="submit" class="btn btn-success btn-sm ms-2">
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal3 -->
+<div
+  class="modal fade"
+  id="exampleModal3"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="loadProductById(product.id)">
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example97"
+              placeholder="ID"
+              name="id"
+              [(ngModel)]="product.id"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-success btn-sm ms-2">GET</button>
+        </form>
+
+        <form (ngSubmit)="deleteProduct()">
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example8"
+              placeholder="CREATED AT"
+              name="createdAt"
+              [(ngModel)]="product.createdAt"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example8"
+              placeholder="PRODUCT NAME"
+              name="product_name"
+              [(ngModel)]="product.product_name"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example8"
+              placeholder="PRODUCT IMAGE "
+              name="product_image"
+              [(ngModel)]="product.product_image"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                <input
+                  type="text"
+                  id="form3Example1m1"
+                  placeholder="PRODUCT TYPE"
+                  name="product_type"
+                  [(ngModel)]="product.product_type"
+                  class="form-control form-control-sm"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+                <input
+                  type="text"
+                  id="form3Example1n1"
+                  placeholder="COST"
+                  name="cost"
+                  [(ngModel)]="product.cost"
+                  class="form-control form-control-sm"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example9"
+              placeholder="DESCRIPTION"
+              name="description"
+              [(ngModel)]="product.description"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example90"
+              placeholder="PRODUCT MATERIAL"
+              name="product_material"
+              [(ngModel)]="product.product_material"
+              class="form-control form-control-sm"
+            />
+          </div>
+
+          <div class="form-outline mb-4">
+            <input
+              type="text"
+              id="form3Example99"
+              placeholder="PRODUCT"
+              name="product"
+              [(ngModel)]="product.product"
+              class="form-control form-control-sm"
+            />
+          </div>
+          <div class="d-flex justify-content-end pt-3">
+            <button type="submit" class="btn btn-danger btn-sm ms-2">
+              Delete
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
